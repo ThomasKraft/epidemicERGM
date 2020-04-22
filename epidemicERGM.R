@@ -210,7 +210,15 @@ control <- control.net(type = "SIR", nsteps = 300, nsims = 10, epi.by = "SES", n
 sim1 <- netsim(mod1, param, init, control)
 
 # Plots of how the epidemic spread
-plot(sim1, mean.line = FALSE, qnts = FALSE, sim.lines = TRUE)
+plot(sim1, mean.line = FALSE, qnts = FALSE, sim.lines = TRUE, xlim=c(0,150), legend=F)
+legend(x = 100, y=100, legend = c("Susceptible", "Infected", "Recovered"), col = c("blue", "red", "green"), lty = 1)
+
+# plot by SES
+plot(sim1, y = c("i.num.SES0", "i.num.SES1"), mean.line = FALSE, qnts = FALSE, sim.lines = TRUE, xlim=c(0,150), ylab="Number infected")
+legend(x = 100, y=60, legend = c("Low SES", "High SES"), col = c("blue", "red"), lty = 1)
+
+plot(sim1, y = c("s.num.SES0", "s.num.SES1"), legend = F, ylab="Number not infected", xlim=c(0,150))
+legend(x = 100, y=60, legend = c("Low SES", "High SES"), col = c("blue", "red"), lty = 1)
 
 # Plots of how the simulated dynamic networks looked at different timepoints
 par(mfrow = c(1,2), mar = c(0,0,1,0))
